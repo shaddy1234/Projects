@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STOPWATCH</title>
+    <style>
+      body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: lightblue;
+      }
+      .container {
+        width: 350px;
+        height: 250px;
+        background-color: white;
+        border-radius: 28px;
+      }
+      .timer {
+        width: 80%;
+        font-size: 75px;
+        text-align: center;
+        padding: 38px;
+        margin: 0px auto;
+      }
+      .buttons {
+        text-align: center;
+      }
+      button {
+        margin: 0 10px;
+      }
+      .start-stop-btn,
+      .reset-btn {
+        background-color: blue;
+        color: white;
+        font-size: 15px;
+        padding: 10px;
+        font-weight: bold;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+      }
+      .reset-btn {
+        background-color: black;
+      }
+      .stop {
+        background-color: greenyellow;
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="timer">00:00:00</div>
+      <div class="buttons">
+        <button class="start-stop-btn">Start</button>
+        <button class="reset-btn">Reset</button>
+      </div>
+    </div>
+    <script>
+      const startStopBtn = document.querySelector(".start-stop-btn");
+      const resetBtn = document.querySelector(".reset-btn");
+
+      let seconds = 0;
+      let minutes = 0;
+      let hours = 0;
+
+      let preceedingSeconds = 0;
+      let preceedingMinutes = 0;
+      let preceedingHours = 0;
+
+      let timerInterval = null;
+      let timerStatus = "onstop";
+
+      function stopWatch() {
+        seconds++;
+        if (seconds / 60 === 1) {
+          seconds = 0;
+          minutes++;
+
+          if (minutes / 60 === 1) {
+            minutes = 0;
+            hours++;
+          }
+        }
+        if (seconds < 10) {
+          preceedingSeconds = "0" + seconds.toString();
+        } else {
+          preceedingSeconds = seconds;
+        }
+        if (minutes < 10) {
+          preceedingMinutes = "0" + minutes.toString();
+        } else {
+          preceedingMinutes = minutes;
+        }
+        if (hours < 10) {
+          preceedingHours = "0" + hours.toString();
+        } else {
+          preceedingHours = hours;
+        }
+
+        let timerDisplay = (document.querySelector(".timer").innerText =
+          preceedingHours + ":" + preceedingMinutes + ":" + preceedingSeconds);
+      }
+
+      startStopBtn.addEventListener("click", () => {
+        if (timerStatus === "onstop") {
+          timerInterval = setInterval(stopWatch, 1000);
+          startStopBtn.innerHTML = "Stop";
+          if (startStopBtn.innerHTML === "Stop") {
+            startStopBtn.classList.add("stop");
+          } else {
+            startStopBtn.classList.remove("stop");
+          }
+
+          timerStatus = "onplay";
+        } else {
+          clearInterval(timerInterval);
+          startStopBtn.classList.remove("stop");
+          timerStatus = "onstop";
+        }
+      });
+
+      resetBtn.addEventListener("click", () => {
+        clearInterval(timerInterval);
+
+        seconds = 0;
+        minutes = 0;
+        hours = 0;
+
+        document.querySelector(".timer").innerHTML = "00:00:00";
+        startStopBtn.innerHTML = "Start";
+      });
+    </script>
+  </body>
+</html>

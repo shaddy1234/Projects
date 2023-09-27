@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anims</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        background: url(mountain.jpg) no-repeat center center/cover;
+        height: 100vh;
+      }
+      .question {
+        position: absolute;
+        top: 75%;
+        left: 12%;
+        height: 60px;
+        transition: 0.5s;
+        width: 180px;
+        font-size: 1.2rem;
+        padding: 5px;
+        background: transparent;
+        border: 1px solid blue;
+        border-radius: 3px;
+        color: white;
+      }
+      .question:hover {
+        background-color: white;
+        color: black;
+      }
+      .answer {
+        background-color: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 90px;
+        width: 180px;
+        padding: 12px 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.3rem;
+        border-radius: 3px;
+
+        animation-name: slidein;
+        animation-duration: 0.9s;
+      }
+      .cut {
+        font-size: 2.7rem;
+        cursor: pointer;
+      }
+      .cut:hover {
+        color: red;
+      }
+
+      @keyframes slidein {
+        from {
+          top: -280px;
+          opacity: 0;
+        }
+        to {
+          top: 50%;
+          opacity: 1;
+        }
+      }
+      .container {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="question">
+      <p>Where's Shaddy</p>
+    </button>
+
+    <div class="container">
+      <div class="answer">
+        <p>Here I am!</p>
+        <div class="cut">&times;</div>
+      </div>
+    </div>
+
+    <script>
+      let questionBtn = document.querySelector(".question");
+      let cutBtn = document.querySelector(".cut");
+      let containerBox = document.querySelector(".container");
+
+      questionBtn.addEventListener("click", () => {
+        containerBox.style.display = "block";
+      });
+
+      cutBtn.addEventListener("click", () => {
+        containerBox.style.display = "none";
+      });
+    </script>
+  </body>
+</html>
