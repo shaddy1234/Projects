@@ -98,20 +98,20 @@
             todoListHTML += html;
           }
           document.querySelector(".js-todo-list").innerHTML = todoListHTML;
-          document.querySelectorAll('.delete-button').forEach((deleteButton, index) => {
-            deleteButton.addEventListener('click', () => {
-              todoList.splice(index,1)
-              renderTodoList();
-            })
-          })
+          document
+            .querySelectorAll(".delete-button")
+            .forEach((deleteButton, index) => {
+              deleteButton.addEventListener("click", () => {
+                todoList.splice(index, 1);
+                renderTodoList();
+              });
+            });
         }
-        document.querySelector('.js-add-button').addEventListener('click', () => {
-          if () {
+        document
+          .querySelector(".js-add-button")
+          .addEventListener("click", () => {
             addTodo();
-          } else {
-
-          }
-        });
+          });
 
         function addTodo() {
           const inputElement = document.querySelector(".Doing");
